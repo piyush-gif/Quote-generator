@@ -43,6 +43,9 @@ function App() {
       console.log(err);
     })
   }
+
+  const twitterUrl= quote ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${quote.text} - ${quote.author}`)}`
+  : null;
   return (
     <div className="quote-container">
       <h3>Quote Generator</h3>
@@ -52,7 +55,16 @@ function App() {
         {quote && <p>{quote.text} - {quote.author}</p>}
         <button onClick={handleQuote}>New Quote</button>
         <button onClick={handleCopy}>copy to clipboard</button>
-        <button>X</button>
+        {quote && (
+          <a 
+            href={twitterUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="tweet-button"
+          >
+            Tweet this
+          </a>
+          )}
       </div>
     </div>
   )
