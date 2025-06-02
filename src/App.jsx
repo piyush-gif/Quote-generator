@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import './App.css'
 
@@ -6,6 +6,16 @@ function App() {
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [clicks, setClicks] =useState(0);
+  const clickRef = useRef(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setClicks(clickRef.current);
+      clickRef.current = 0; 
+    }, 3000);
+    return () => clearInterval(interval);
+  },[]);
 
   useEffect(() => {
 
@@ -17,14 +27,11 @@ function App() {
       handleQuote();
     }
   },[]);
-
-
   useEffect (() => {
     if (quote) {
        localStorage.setItem('lastQuote', JSON.stringify(quote));
     }
   },[quote]);
-
 
   const handleQuote =() =>{
     setLoading(true);
@@ -65,9 +72,15 @@ function App() {
   const twitterUrl= quote ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${quote.text} - ${quote.author}`)}`
   : null;
 
+  
+  const handleCount = () => {
+    clickRef.current+=1
+  }
+  
   return (
     <div className="quote-container">
       <h3>Quote Generator</h3>
+      {clicks && <p>clicks:{clicks}</p>}
       <div className="quote"> 
         {loading && <p>Loading....</p>}
         {error && <p> something went wrong</p>}
@@ -84,6 +97,7 @@ function App() {
             Tweet this
           </a>
           )}
+          <button onClick={handleCount}>Clicks in the last 30sec</button>
       </div>
     </div>
   )
