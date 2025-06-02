@@ -7,6 +7,24 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+
+    const savedQuote = localStorage.getItem('lastQuote');
+    if (savedQuote) {
+      setQuote(JSON.parse(savedQuote));
+    }
+    else{
+      handleQuote();
+    }
+  },[]);
+
+
+  useEffect (() => {
+    if (quote) {
+       localStorage.setItem('lastQuote', JSON.stringify(quote));
+    }
+  },[quote]);
+
 
   const handleQuote =() =>{
     setLoading(true);
@@ -46,6 +64,7 @@ function App() {
 
   const twitterUrl= quote ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${quote.text} - ${quote.author}`)}`
   : null;
+
   return (
     <div className="quote-container">
       <h3>Quote Generator</h3>
