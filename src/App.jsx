@@ -30,6 +30,19 @@ function App() {
       setLoading(false);
     })
   }
+  const handleCopy = () => {
+    if (!quote) return;
+
+    const textToCopy = `${quote.text} - ${quote.author}`;
+
+    navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      alert('Quote copid to clipboard');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
   return (
     <div className="quote-container">
       <h3>Quote Generator</h3>
@@ -38,7 +51,7 @@ function App() {
         {error && <p> something went wrong</p>}
         {quote && <p>{quote.text} - {quote.author}</p>}
         <button onClick={handleQuote}>New Quote</button>
-        <button>copy</button>
+        <button onClick={handleCopy}>copy to clipboard</button>
         <button>X</button>
       </div>
     </div>
