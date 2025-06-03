@@ -13,7 +13,7 @@ function App() {
     const interval = setInterval(() => {
       setClicks(clickRef.current);
       clickRef.current = 0; 
-    }, 3000);
+    }, 10000);
     return () => clearInterval(interval);
   },[]);
 
@@ -97,7 +97,7 @@ function App() {
             Tweet this
           </a>
           )}
-          <button onClick={handleCount}>Clicks in the last 30sec</button>
+          <button onClick={handleCount}>total clicks</button>
       </div>
     </div>
   )

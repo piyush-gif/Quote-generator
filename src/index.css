@@ -1,6 +1,153 @@
+/* --- Basic Reset & Body Styling --- */
 body, html {
   margin: 0;
   padding: 0;
-  height: 100%; 
-  font-family: sans-serif; 
+  height: 100%; /* Ensure html and body take full height */
+  font-family: 'Arial', sans-serif; /* A clean, readable font */
+  background-color: #f4f7f6; /* Light background for the page */
+  color: #333; /* Default text color */
+  display: flex; /* Use flexbox to center the entire app vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* --- Quote Container Styling --- */
+.quote-container {
+  display: flex;
+  flex-direction: column; /* Stack children (h3 and quote div) vertically */
+  align-items: center; /* Center content horizontally within the container */
+  justify-content: center; /* Center content vertically within the container */
+
+  background-color: #ffffff; /* White background for the main card */
+  border-radius: 12px; /* Slightly rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  padding: 40px 30px; /* Ample padding inside the container */
+  max-width: 600px; /* Limit maximum width */
+  width: 90%; /* Responsive width */
+  text-align: center; /* Center text within the container */
+  min-height: 300px; /* Ensure a minimum height for the card */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.quote-container h3 {
+  font-size: 2.2em; /* Larger heading */
+  color: #2c3e50; /* Darker heading color */
+  margin-bottom: 30px; /* Space below the heading */
+  text-transform: uppercase; /* Make heading uppercase */
+  letter-spacing: 2px; /* Add some letter spacing */
+}
+
+/* --- Quote Display Area --- */
+.quote {
+  width: 100%; /* Take full width of its parent (.quote-container) */
+  min-height: 80px; /* Give some space for loading/error messages */
+  margin-bottom: 25px; /* Space between quote content and buttons */
+
+  display: flex; /* Use flexbox for content inside .quote */
+  flex-direction: column; /* Stack quote text/author vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.quote p {
+  font-size: 1.4em; /* Larger quote text */
+  line-height: 1.6; /* Good line spacing for readability */
+  margin: 0 0 15px 0; /* Space between quote and author, no top margin */
+  color: #555; /* Slightly lighter color for quote text */
+  font-style: italic; /* Italicize the quote */
+}
+
+.quote p:last-child { /* Targets the author paragraph */
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #666;
+  margin-top: 10px;
+  font-style: normal; /* Author should not be italic */
+}
+
+/* --- Loading and Error Messages --- */
+.quote p:first-child:not(.quote-text) { /* Styles for "Loading..." and "Something went wrong" */
+  font-size: 1.2em;
+  color: #999;
+}
+
+/* --- Buttons --- */
+.quote button,
+.tweet-button {
+  background-color: #3498db; /* A vibrant blue */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded button corners */
+  padding: 12px 25px; /* Comfortable padding */
+  margin: 8px; /* Space between buttons */
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+  text-decoration: none; /* Remove underline for anchor tag buttons */
+  display: inline-block; /* Ensure tweet link behaves like a button */
+  text-align: center;
+}
+
+.quote button:hover,
+.tweet-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.quote button:active,
+.tweet-button:active {
+  transform: translateY(0); /* Press down effect */
+}
+
+/* Specific button colors */
+.quote button:nth-of-type(1) { /* New Quote button */
+    background-color: #2ecc71; /* Green */
+}
+.quote button:nth-of-type(1):hover {
+    background-color: #27ae60;
+}
+
+.quote button:nth-of-type(2) { /* Copy button */
+    background-color: #f1c40f; /* Yellow */
+}
+.quote button:nth-of-type(2):hover {
+    background-color: #f39c12;
+}
+
+/* Style for the Tweet button (anchor tag) */
+.tweet-button {
+    background-color: #1DA1F2; /* Twitter blue */
+}
+.tweet-button:hover {
+    background-color: #0c85d0;
+}
+
+/* --- Clicks Counter --- */
+.quote-container > p { /* Targets the 'clicks' paragraph directly inside quote-container */
+    font-size: 1.1em;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 650px) {
+  .quote-container {
+    padding: 30px 20px; /* Reduce padding on smaller screens */
+    width: 95%; /* Take more width on small screens */
+  }
+
+  .quote-container h3 {
+    font-size: 1.8em; /* Smaller heading on small screens */
+  }
+
+  .quote p {
+    font-size: 1.2em; /* Smaller quote text */
+  }
+
+  .quote button,
+  .tweet-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    margin: 6px;
+  }
 }
